@@ -2,8 +2,8 @@ version: "3"
 
 services:
     mysql:
-        container_name: mysql_docker
-        image: mysql:5.7
+        container_name: mariadb
+        image: mariadb:10.2
         volumes:
             - db_data:/var/lib/mysql
         restart: always
