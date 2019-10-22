@@ -1,18 +1,15 @@
-version: "3"
+version: '3'
 
 services:
-    database:
-        container_name: mariadb
-        image: mariadb:10.2
-        volumes:
-            - db_data:/var/lib/mysql
-        restart: always
-        ports:
-            - "3306:3306"
-        environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: default
-            MYSQL_USER: default
-            MYSQL_PASSWORD: root
-volumes:
-    db_data: {}
+
+  database:
+    container_name: mariadb
+    image: mariadb:10.1
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: teste
+      MYSQL_USER: teste
+      MYSQL_PASSWORD: root
