@@ -1,0 +1,5 @@
+# Backup
+docker exec {CONTAINER_NAME} /usr/bin/mysqldump --host={HOST} --port={PORT} --user={USER} --password={PASSWORD} {DATABASE} > backup.sql
+
+# Restore
+cat backup.sql | docker exec -i {CONTAINER_NAME} /usr/bin/mysql --host={HOST} --port={PORT} --user={USER} --password={PASSWORD} {DATABASE}
