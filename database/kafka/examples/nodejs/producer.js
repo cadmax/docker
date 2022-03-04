@@ -3,7 +3,7 @@ const { Kafka } = require("kafkajs")
 
 const clientId = "my-app"
 const brokers = [process.env.KAFKA_URL]
-const topic = "ads.event"
+const topic = process.env.TOPIC_NAME
 
 const kafka = new Kafka({ clientId, brokers })
 const producer = kafka.producer()
@@ -12,9 +12,7 @@ const producer = kafka.producer()
 const produce = async () => {
 	await producer.connect()
 
-	const message = {
-		"ok": 1
-	}
+	const message = {}
 
 		try {
 			await producer.send({
