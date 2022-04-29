@@ -2,7 +2,7 @@
 const { Kafka } = require("kafkajs")
 
 const clientId = "my-app"
-const brokers = [process.env.KAFKA_URL]
+const brokers = process.env.KAFKA_URL.split(',')
 const topic = process.env.TOPIC_NAME
 
 const kafka = new Kafka({ clientId, brokers })
@@ -24,6 +24,7 @@ const produce = async () => {
 					},
 				],
 			})
+			
 		} catch (err) {
 			console.error("could not write message " + err)
 		}
