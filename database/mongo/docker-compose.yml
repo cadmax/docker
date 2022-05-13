@@ -2,18 +2,20 @@ version: "3.5"
 
 services:
   database:
-    container_name: mongo
+    container_name: "mongo"
     image: "mongo"    
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
       MONGO_INITDB_DATABASE: admin
+      TZ: America/Sao_Paulo
     ports:
       - "27017:27017"
+    volumes:
+      - ./mongo-volume:/data/db
     networks:
       - proxy
-
+    
 networks:
   proxy:
     driver: bridge
-
