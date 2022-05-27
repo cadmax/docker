@@ -19,11 +19,16 @@ services:
       - zookeeper
     ports:
       - "9092:9092"
+      - "29092:29092"
+      # para conexoes externas, colocar no /etc/hosts a saida IP PUBLIC dessa maquina e broker, ex:
+      # /etc/hosts
+      # IP EXTERNO      broker
+      # 5.245.100.855   broker
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://:29092,PLAINTEXT_HOST://:9092
       KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
@@ -54,26 +59,6 @@ services:
   #    SCHEMA_REGISTRY_HOST_NAME: schema-registry
   #    SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: "zookeeper:2181"
 
-  #control-center:
-  #  image: confluentinc/cp-enterprise-control-center:5.4.0
-  #  hostname: control-center
-  #  container_name: control-center
-  #  depends_on:
-  #    - zookeeper
-  #    - broker
-  #    - schema-registry
-  #  ports:
-  #    - "9021:9021"
-  #  environment:
-  #    CONTROL_CENTER_BOOTSTRAP_SERVERS: 'broker:29092'
-  #    CONTROL_CENTER_ZOOKEEPER_CONNECT: 'zookeeper:2181'
-  #    CONTROL_CENTER_SCHEMA_REGISTRY_URL: "http://schema-registry:8081"
-  #    CONTROL_CENTER_REPLICATION_FACTOR: 1
-  #    CONTROL_CENTER_INTERNAL_TOPICS_PARTITIONS: 1
-  #    CONTROL_CENTER_MONITORING_INTERCEPTOR_TOPIC_PARTITIONS: 1
-  #    CONFLUENT_METRICS_TOPIC_REPLICATION: 1
-  #    PORT: 9021
-    
   akhq:
     image: tchiotludo/akhq
     depends_on:
