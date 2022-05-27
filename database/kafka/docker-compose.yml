@@ -4,6 +4,7 @@ services:
   zookeeper:
     image: confluentinc/cp-zookeeper:5.4.0
     hostname: zookeeper
+    restart: unless-stopped
     container_name: zookeeper
     ports:
       - "2181:2181"
@@ -14,6 +15,7 @@ services:
   broker:
     image: confluentinc/cp-server:5.4.0
     hostname: broker
+    restart: unless-stopped
     container_name: broker
     depends_on:
       - zookeeper
@@ -41,6 +43,7 @@ services:
 
   kafka-tools:
     image: confluentinc/cp-kafka:5.4.0
+    restart: unless-stopped
     hostname: kafka-tools
     container_name: kafka-tools
     command: ["tail", "-f", "/dev/null"]
@@ -49,6 +52,7 @@ services:
   #schema-registry:
   #  image: confluentinc/cp-schema-registry:5.4.0
   #  hostname: schema-registry
+  #  restart: unless-stopped
   #  container_name: schema-registry
   #  depends_on:
   #    - zookeeper
@@ -61,6 +65,7 @@ services:
 
   akhq:
     image: tchiotludo/akhq
+    restart: unless-stopped
     depends_on:
       - zookeeper
       - broker
