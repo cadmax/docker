@@ -1,5 +1,5 @@
-# Backup
-docker exec {CONTAINER_NAME} /usr/bin/mysqldump --host={HOST} --port={PORT} --user={USER} --password={PASSWORD} {DATABASE} > backup.sql
+#backup
+docker exec mariadb sh -c 'exec mariadb-dump -h "{HOST}" -P "{PORT}" -u "{USER}" -p"{PASSWORD}" "{DATABASE}"' > backup.sql
 
-# Restore
-cat backup.sql | docker exec -i {CONTAINER_NAME} /usr/bin/mysql --host={HOST} --port={PORT} --user={USER} --password={PASSWORD} {DATABASE}
+#restore
+docker exec -i mariadb sh -c 'exec mariadb -h "{HOST}" -P "{PORT}" -u "{USER}" -p"{PASSWORD}" "{DATABASE}"' < backup.sql

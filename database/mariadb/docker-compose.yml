@@ -4,7 +4,7 @@ services:
 
   database:
     container_name: mariadb
-    image: mariadb
+    image: mariadb:10
     restart: unless-stopped
     ports:
       - "3306:3306"
