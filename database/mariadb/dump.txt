@@ -3,3 +3,4 @@ docker exec mariadb sh -c 'exec mariadb-dump -h "{HOST}" -P "{PORT}" -u "{USER}"
 
 #restore
 docker exec -i mariadb sh -c 'exec mariadb -h "{HOST}" -P "{PORT}" -u "{USER}" -p"{PASSWORD}" "{DATABASE}"' < backup.sql
+
